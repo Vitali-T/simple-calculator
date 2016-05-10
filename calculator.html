@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<meta charset="UTF-8">
+<link href="style.css" rel='stylesheet' type='text/css'>
+</head>
+<body>
+<form action="" method ="" id="formular">
+<div id="container">
+</br>
+<input type="text" name="ecran" id="ecran" value="0"></br></br>
+		<input type="submit" name="buton" class= "buton" value='←'>
+		<input type="submit" name="buton" class= "buton" value="C">
+		<input type="submit" name="buton" class= "buton" value="1/x">
+		<input type="submit" name="buton" class= "buton" value="+"></br>
+		<input type="submit" name="buton" class= "buton" value="7">
+		<input type="submit" name="buton" class= "buton" value="8">
+		<input type="submit" name="buton" class= "buton" value="9">
+		<input type="submit" name="buton" class= "buton" value="/">
+		</br>
+		<input type="submit" name="buton" class= "buton" value="4">
+		<input type="submit" name="buton" class= "buton" value="5">
+		<input type="submit" name="buton" class= "buton" value="6">
+		<input type="submit" name="buton" class= "buton" value="*">
+		</br>
+		<input type="submit" name="buton" class= "buton" value="1">
+		<input type="submit" name="buton" class= "buton" value="2">
+		<input type="submit" name="buton" class= "buton" value="3">
+		<input type="submit" name="buton" class= "buton" value="-">
+		</br>
+		<input type="submit" name="buton" class= "buton" value="0">
+		<input type="submit" name="buton" class= "buton" value=".">
+		<input type="submit" name="buton" class= "buton" value="%">
+		<input type="submit" name="buton" class= "buton" value="=">
+		 </br></br>
+</div>
+</form>
+<script>
+var valoareAfisata = document.getElementById('ecran');
+	var buton = document.getElementsByClassName('buton');
+	var form = document.getElementById("formular");
+	var dotAdded = false;
+	//prevenim reincarcarea paginii cand dam click pe o valoare
+	form.onsubmit = function(e){
+		e.preventDefault();
+		}
+	//verificam sa nu fie mai multi operatori pusi consecutiv
+	function checkMulti() {
+		//valoareAfisata.value = valoareAfisata.value.replace(/([0-9])([\+\-\/\%\*]*)([\+\-\/\%\*])([0-9])/, "$1$3$4");
+		if(isNaN(valoareAfisata.value[valoareAfisata.value.length-1])){
+			valoareAfisata.value = valoareAfisata.value.slice(0,-1);
+		}
+	}
+	for(var i=0; i<buton.length;i++){
+	buton[i].onclick = function(e){
+		var valoare = this.value;
+		switch(valoare){
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case '*':
+			case '/':
+			case '+':
+			case '-':
+			case '%':
+				if (valoareAfisata.value=="0"){
+					if (!isNaN(valoare)){
+						valoareAfisata.value = "";
+						valoareAfisata.value += valoare;
+					}
+					else {
+						valoareAfisata.value += valoare;
+						dotAdded = false;
+						}
+				}
+				else if (isNaN(valoare)){
+					checkMulti();	
+					valoareAfisata.value += valoare;
+					dotAdded = false;
+				}
+				else {
+					valoareAfisata.value += valoare;		
+				}
+				break;
+			case '=':
+					checkMulti();
+					valoareAfisata.value = eval(valoareAfisata.value);
+					dotAdded = false;
+				break;
+			case '←':
+				if (!valoareAfisata.value[1]){
+					valoareAfisata.value = '0';
+					dotAdded = false;
+				}
+				else
+					valoareAfisata.value = valoareAfisata.value.slice(0,-1);
+				break;
+			case '1/x':
+				checkMulti();
+				valoareAfisata.value = 1/(valoareAfisata.value);
+				dotAdded = false;
+				break;
+			case '.':
+				if(!dotAdded){
+					if(isNaN(valoareAfisata.value[valoareAfisata.value.length-1])&& valoareAfisata.value[valoareAfisata.value.length-1]!='.'){
+						valoareAfisata.value += '0'+ valoare;
+						dotAdded = true;
+						}
+					else{ 	
+						valoareAfisata.value +=valoare;
+						dotAdded = true;
+						}
+					}	
+				break;
+			case 'C':
+				valoareAfisata.value = "0";
+				dotAdded = false;
+				break;
+		}
+	}
+	}
+	</script>
+</body>
+</html>

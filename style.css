@@ -1,0 +1,30 @@
+.buton {
+	width:40px;
+	height:40px;
+	margin-bottom:5px;
+	margin-left:6px;
+	border-radius:3px;
+	font-size:18px;
+	box-shadow:2px 2px gray;
+}
+#container {
+	border: 2px solid #389738;
+	border-radius:5px;
+	width:200px;
+	padding: 10px;
+	background-color:#7AB97A;
+	box-shadow: 5px 5px 5px #389738;
+	margin:0 auto;
+	margin-top:100px;
+}
+#ecran {
+	width:180px;
+	height:45px;
+	border: 1px solid #389738;
+	padding:5px;
+	border-radius:3px;
+	margin-bottom:5px;
+	margin-left:5px;
+	font-size:25px;
+	box-shadow:2px 2px gray;
+}
